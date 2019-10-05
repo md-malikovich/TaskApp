@@ -51,7 +51,7 @@ public class HomeFragment extends Fragment {
             public void onItemClick(int position) {
                 Task task = list.get(position);
                 //Toast.makeText(getContext(),"pos = " + position, Toast.LENGTH_SHORT).show(); //TODO: показ позиции
-                Toast.makeText(getContext(),"Title = " + task.getTitle(), Toast.LENGTH_SHORT).show(); //TODO: показ позиции
+                Toast.makeText(getContext(),"a) Title = " + task.getTitle() + "; b) Desc = " + task.getDesc(), Toast.LENGTH_SHORT).show(); //TODO: показ Title
             }
         });
 
