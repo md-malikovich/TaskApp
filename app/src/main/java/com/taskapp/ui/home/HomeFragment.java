@@ -53,6 +53,12 @@ public class HomeFragment extends Fragment {
                 //Toast.makeText(getContext(),"pos = " + position, Toast.LENGTH_SHORT).show(); //TODO: показ позиции
                 Toast.makeText(getContext(),"a) Title = " + task.getTitle() + "; b) Desc = " + task.getDesc(), Toast.LENGTH_SHORT).show(); //TODO: показ Title
             }
+
+            @Override
+            public void onItemLongClick(int position) {
+                Task task = list.get(position);
+                Toast.makeText(getContext(),"pos = " + position, Toast.LENGTH_SHORT).show(); //TODO: показ позиции при ДОЛГОМ нажатии
+            }
         });
 
     }

@@ -58,6 +58,14 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
                     onItemClickListener.onItemClick(getAdapterPosition()); //TODO: вызываем метод интерфеса и в параметрах указываем position
                 }
             });
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    onItemClickListener.onItemLongClick(getAdapterPosition());
+                    return false;
+                }
+            });
         }
 
         public void bind(Task task) {
