@@ -24,7 +24,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter { //TODO: созда�
     }
 
     @Override
-    public int getCount() {
-        return 3; //TODO: кол-во страниц Слайдера
+    public int getCount() { //TODO: Returns total number of pages
+        return 3;
     }
 }

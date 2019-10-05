@@ -23,7 +23,6 @@ public class BoardFragment extends Fragment {
         // Required empty public constructor
     }
 
-    @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -33,16 +32,16 @@ public class BoardFragment extends Fragment {
         int pos = getArguments().getInt("pos"); //TODO: getArguments().getInt() for Fragment (getIntent for Activity)
         switch (pos) {
             case 0:
-                imageView.setImageResource(R.drawable.image22);
-                //textTitle.setText("Hello!");
+                imageView.setImageResource(R.drawable.image44);
+                textTitle.setText("Hello!");
                 break;
             case 1:
                 imageView.setImageResource(R.drawable.image33);
-                //textTitle.setText("How r u?");
+                textTitle.setText("How r u?");
                 break;
             case 2:
-                imageView.setImageResource(R.drawable.image44);
-                //textTitle.setText("What r u doing?");
+                imageView.setImageResource(R.drawable.image22);
+                textTitle.setText("What r u doing?");
                 break;
         }
         return view;
