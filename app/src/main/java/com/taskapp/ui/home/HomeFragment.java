@@ -56,7 +56,7 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onItemLongClick(int position) {
-                Task task = list.get(position);
+                //Task task = list.get(position);
                 Toast.makeText(getContext(),"pos = " + position, Toast.LENGTH_SHORT).show(); //TODO: показ позиции при ДОЛГОМ нажатии
             }
         });
