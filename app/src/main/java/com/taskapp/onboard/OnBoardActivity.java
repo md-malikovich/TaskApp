@@ -3,18 +3,24 @@ package com.taskapp.onboard;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
+import com.taskapp.MainActivity;
 import com.taskapp.R;
 
 public class OnBoardActivity extends AppCompatActivity {
 
-    private static final String TAG = OnBoardActivity.class.getName(); //TODO:
-
-    //private MyPagerAdapter fragmentAdapter; //TODO:
     private ViewPager viewPager;
+    private Button btnSkip;
     private TabLayout tabLayout; //TODO:
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +35,15 @@ public class OnBoardActivity extends AppCompatActivity {
 
         //tabLayout = (TabLayout) findViewById(R.id.tableLayout); //TODO:
         //tabLayout.setupWithViewPager(viewPager); //TODO:
-    }
 
+        btnSkip = findViewById(R.id.btnSkip);
+        btnSkip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(OnBoardActivity.this, MainActivity.class));
+                finish();
+                return;
+            }
+        });
+    }
 }

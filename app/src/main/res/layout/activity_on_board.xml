@@ -19,15 +19,15 @@
         android:layout_height="wrap_content"
         android:textStyle="italic"
         android:text="@string/skip"
+        android:layout_marginTop="20dp"
         android:layout_alignParentTop= "true"
         android:layout_alignParentRight= "true"/>
 
     <!--<android.support.design.widget.TabLayout
         android:id="@+id/tableLayout"
-        app:tabMode="scrollable"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabGravity="fill"
+        app:tabMode="scrollable"
         android:layout_alignParentBottom = "true"
         android:layout_marginBottom="40dp"
         android:layout_centerHorizontal="true"/>-->

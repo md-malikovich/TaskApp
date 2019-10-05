@@ -83,12 +83,9 @@ public class MainActivity extends AppCompatActivity {
         Log.e("TAG", "onActivityResult activity");
         Fragment navHostFragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navHostFragment.getChildFragmentManager().getFragments().get(0).onActivityResult(requestCode, resultCode, data);
-
     }
 }
-// 1. Добавить кнопку на последний Фрагмент - при нажатии показывается Toast - "Вы меня нажимаете". Выход в MainActivity делать не нужно.
-// мы создали 1 Фрагмент 3 раза, и на 3ем создании должна появлять кнопка. TODO: Кнопка внутри Фрагмента
-// 2. Добавить копку Skip TODO: в Activity и она не должна двигаться при листании - надо делать Паралельно с ViewPager
-// 3. Сделать дизайн - TODO: у каждого фрагмента свой цвет фона
-// 4. Точки - TODO:
-// 5.
+//+// 1. Добавить кнопку на последний Фрагмент - при нажатии показывается Toast - "Вы меня нажимаете". Выход в MainActivity делать не нужно;
+//+// 2. Добавить копку Skip в Activity. Кнопка не должна двигаться при листании (паралельно с ViewPager);
+//-// 3. TODO: Сделать дизайн - у каждого фрагмента свой цвет фона;
+//-// 4. TODO: Точки - TableLayout.
