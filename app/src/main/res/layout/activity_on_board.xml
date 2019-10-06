@@ -24,16 +24,17 @@
        android:layout_alignParentTop= "true"
        android:layout_alignParentEnd= "true"/>
 
+    <!--TODO: app:tabMode="scrollable"-->
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tableLayout"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="20dp"
         android:background="@color/colorPrimaryDark"
         android:layout_alignParentBottom = "true"
-        app:tabMode="scrollable"
         app:tabRippleColor="@color/colorPrimary"
-        app:tabIndicatorHeight="19dp"
+        app:tabIndicatorHeight="5dp"
         android:layout_marginBottom="40dp"
+        app:tabBackground="@drawable/image001"
         />
 
     <!--<android.support.design.widget.TabLayout

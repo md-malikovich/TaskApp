@@ -34,17 +34,17 @@ public class BoardFragment extends Fragment {
         switch (pos) {
             case 0:
                 view.setBackgroundResource(R.drawable.image11);
-                imageView.setImageResource(R.drawable.image22);
+                imageView.setImageResource(R.drawable.bg5);
                 textTitle.setText("Hello!");
                 break;
             case 1:
                 view.setBackgroundResource(R.drawable.bg2);
-                imageView.setImageResource(R.drawable.bg9);
+                imageView.setImageResource(R.drawable.bg10);
                 textTitle.setText("How r u?");
                 break;
             case 2:
-                view.setBackgroundResource(R.drawable.bg6);
-                imageView.setImageResource(R.drawable.image33);
+                view.setBackgroundResource(R.drawable.bgwhite);
+                imageView.setImageResource(R.drawable.bg9);
                 btnStart.setVisibility(View.VISIBLE);
                 textTitle.setText("What r u doing?");
                 break;
