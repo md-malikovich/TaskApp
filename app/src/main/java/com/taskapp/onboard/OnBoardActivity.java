@@ -31,8 +31,8 @@ public class OnBoardActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.viewPager);
         viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), 0)); //TODO:
 
-        //tabLayout = findViewById(R.id.tableLayout); //TODO:
-        //tabLayout.setupWithViewPager(viewPager, true); //TODO: tabLayout.setupWithViewPager(viewPager, true);
+        tabLayout = findViewById(R.id.tableLayout); //TODO:
+        tabLayout.setupWithViewPager(viewPager, true); //TODO: tabLayout.setupWithViewPager(viewPager, true);
         Log.e("ololo", "tabLayout");
 
         btnSkip = findViewById(R.id.btnSkip);
