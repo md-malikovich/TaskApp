@@ -33,16 +33,17 @@ public class BoardFragment extends Fragment {
         int pos = getArguments().getInt("pos"); //TODO: getArguments().getInt() for Fragment (getIntent for Activity)
         switch (pos) {
             case 0:
-                //getView().setBackgroundResource(R.drawable.ic_launcher_background);
-                //imageView.setBackgroundResource(R.drawable.ic_launcher_background);
+                view.setBackgroundResource(R.drawable.image11);
                 imageView.setImageResource(R.drawable.image44);
                 textTitle.setText("Hello!");
                 break;
             case 1:
+                view.setBackgroundResource(R.drawable.bg2);
                 imageView.setImageResource(R.drawable.image22);
                 textTitle.setText("How r u?");
                 break;
             case 2:
+                view.setBackgroundResource(R.drawable.bg3);
                 imageView.setImageResource(R.drawable.image33);
                 btnStart.setVisibility(View.VISIBLE);
                 textTitle.setText("What r u doing?");
