@@ -2,15 +2,11 @@ package com.taskapp.onboard;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.Toast;
-
 import com.google.android.material.tabs.TabLayout;
 import com.taskapp.MainActivity;
 import com.taskapp.R;
@@ -21,11 +17,13 @@ public class OnBoardActivity extends AppCompatActivity {
     private Button btnSkip;
     private TabLayout tabLayout; //TODO:
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_on_board);
+
+        getSupportActionBar().hide(); //TODO: ActionBar setInvisible
+
         initViewPager(); //TODO: запускаем метод
     }
 
@@ -33,8 +31,9 @@ public class OnBoardActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.viewPager);
         viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), 0)); //TODO:
 
-        //tabLayout = (TabLayout) findViewById(R.id.tableLayout); //TODO:
-        //tabLayout.setupWithViewPager(viewPager); //TODO:
+        //tabLayout = findViewById(R.id.tableLayout); //TODO:
+        //tabLayout.setupWithViewPager(viewPager, true); //TODO: tabLayout.setupWithViewPager(viewPager, true);
+        Log.e("ololo", "tabLayout");
 
         btnSkip = findViewById(R.id.btnSkip);
         btnSkip.setOnClickListener(new View.OnClickListener() {
