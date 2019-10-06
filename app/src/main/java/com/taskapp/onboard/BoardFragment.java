@@ -20,7 +20,7 @@ public class BoardFragment extends Fragment {
     Button btnStart;
 
     public BoardFragment() {
-        // Required empty public constructor
+        // 
     }
 
     @Override
