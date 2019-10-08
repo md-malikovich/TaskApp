@@ -21,5 +21,7 @@
     <string name="start">Start</string>
     <string name="opening">opening</string>
     <string name="droid">droid</string>
+    <string name="android1">Android is a mobile operating system developed by Google. It is based on a modified version of the Linux kernel and other open source software, and is designed primarily for touchscreen mobile devices such as smartphones and tablets. In addition, Google has developed Android TV for televisions, Android Auto for cars, and Wear OS for wearables, each with a specialized user interface. Variants of Android are also used on game consoles, digital cameras, PCs and other electronics.</string>
+    <string name="android2">Initially developed by Android Inc., which Google bought in 2005, Android was unveiled in 2007, with the first commercial Android device launched in September 2008. The current stable version is Android 10, released on September 3, 2019. The core Android source code is known as Android Open Source Project (AOSP), which is primarily licensed under the Apache License.</string>
 
 </resources>

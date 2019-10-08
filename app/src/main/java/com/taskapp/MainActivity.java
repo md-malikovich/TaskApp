@@ -29,8 +29,11 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 
+import org.apache.commons.io.FileUtils;
+
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -76,16 +79,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initFile() { // метод для работы с файлами
-        File folder = new File(Environment.getExternalStorageDirectory(), "TaskApp"); //TODO: создали папку во внешней памяти
+        final File folder = new File(Environment.getExternalStorageDirectory(), "TaskApp"); //TODO: создали папку во внешней памяти
         folder.mkdir();
-
-        File file = new File(folder, "note.txt"); //TODO: создали файл в папке
+        File file = new File(folder, "note.txt"); //TODO: создали файл в указанную папку folder
         try {
             file.createNewFile();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //file.url
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                File filePng = new File(folder, "file2.png");
+                try {
+                    FileUtils.copyURLToFile(new URL("https://www.kompanion.kg/uploads/images/de07189c5bb0c1e315076474aaaddf83ee96752a.png"), filePng);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
     }
 
     @Override

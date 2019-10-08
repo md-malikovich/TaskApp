@@ -30,6 +30,7 @@ public class FormActivity extends AppCompatActivity {
         SharedPreferences preferences2 = getSharedPreferences("saving", MODE_PRIVATE);        //TODO: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         editTitle.setText(preferences2.getString("title", ""));
         editDesc.setText(preferences2.getString("desc", ""));
+        //Вариант #2:
         //String title = preferences2.getString("title", "");
         //String desc = preferences2.getString("desc", "");
         //editTitle.setText(title);
@@ -39,7 +40,8 @@ public class FormActivity extends AppCompatActivity {
         fab2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                editTitle.setText("");
+                editDesc.setText("");
             }
         });
     }
@@ -62,7 +64,7 @@ public class FormActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {                                  //TODO: для работы Меню
         if (item.getItemId() == R.id.action_droid) {
-            Toast.makeText(this,"Я, андроид", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,getString(R.string.android1) + getString(R.string.android2), Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);
     }
