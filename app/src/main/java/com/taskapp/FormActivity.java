@@ -3,6 +3,7 @@ package com.taskapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -19,7 +20,25 @@ public class FormActivity extends AppCompatActivity {
         setContentView(R.layout.activity_form);
         editTitle = findViewById(R.id.editTitle);
         editDesc = findViewById(R.id.editDesc);
+
+        SharedPreferences preferences2 = getSharedPreferences("saving", MODE_PRIVATE);
+        editTitle.setText(preferences2.getString("title", ""));
+        editDesc.setText(preferences2.getString("desc", ""));
+        String title = preferences2.getString("title", "");
+        String desc = preferences2.getString("desc", "");
+        editTitle.setText(title);
+        editDesc.setText(desc);
     }
+
+    @Override
+    public void onBackPressed() {
+        SharedPreferences preferences2 = getSharedPreferences("saving", MODE_PRIVATE);
+        preferences2.edit().putString("title", editTitle.getText().toString()).apply();
+        preferences2.edit().putString("desc", editDesc.getText().toString()).apply();
+        preferences2.edit().apply();
+        super.onBackPressed();
+    }
+
 
     public void onClick(View view) {
         String title = editTitle.getText().toString();

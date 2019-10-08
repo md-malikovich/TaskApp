@@ -2,6 +2,8 @@ package com.taskapp.onboard;
 
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +13,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.taskapp.MainActivity;
 import com.taskapp.R;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class BoardFragment extends Fragment {
 
@@ -52,7 +57,11 @@ public class BoardFragment extends Fragment {
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(),"Вы меня нажимаете", Toast.LENGTH_SHORT).show(); //TODO:
+                //Toast.makeText(getContext(),"Вы меня нажимаете", Toast.LENGTH_SHORT).show();
+                SharedPreferences preferences = getActivity().getSharedPreferences("settings", MODE_PRIVATE);
+                preferences.edit().putBoolean("isShown", true).apply();
+                startActivity(new Intent(getContext(), MainActivity.class));
+                getActivity().finish();
             }
         });
         return view;

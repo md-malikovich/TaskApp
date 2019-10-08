@@ -1,13 +1,17 @@
 package com.taskapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import android.os.Environment;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -25,6 +29,9 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 
+import java.io.File;
+import java.io.IOException;
+
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
@@ -33,7 +40,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if(true) {
+        SharedPreferences preferences = getSharedPreferences("settings", MODE_PRIVATE); // создается файл settings
+        boolean isShown = preferences.getBoolean("isShown", false);
+
+        if(!isShown) {
             startActivity(new Intent(this, OnBoardActivity.class)); //TODO: будет выходть постоянно
             finish(); //TODO: для закрытия startActivity
             return; //TODO: необходимо для завершения метода onCreate
@@ -61,6 +71,21 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        initFile();
+    }
+
+    private void initFile() { // метод для работы с файлами
+        File folder = new File(Environment.getExternalStorageDirectory(), "TaskApp"); //TODO: создали папку во внешней памяти
+        folder.mkdir();
+
+        File file = new File(folder, "note.txt"); //TODO: создали файл в папке
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //file.url
     }
 
     @Override
@@ -68,6 +93,16 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {                                  //TODO: для работы Меню
+        if (item.getItemId() == R.id.action_clear) {
+            SharedPreferences preferences = getSharedPreferences("settings", MODE_PRIVATE);
+            preferences.edit().clear().apply();
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -85,7 +120,5 @@ public class MainActivity extends AppCompatActivity {
         navHostFragment.getChildFragmentManager().getFragments().get(0).onActivityResult(requestCode, resultCode, data);
     }
 }
-//+// 1. Добавить кнопку на последний Фрагмент - при нажатии показывается Toast - "Вы меня нажимаете". Выход в MainActivity делать не нужно;
-//+// 2. Добавить копку Skip в Activity. Кнопка не должна двигаться при листании (паралельно с ViewPager);
-//+// 3. Сделать дизайн - у каждого фрагмента свой цвет фона;
-//-// 4. TODO: Точки - TableLayout.
+//-// 1. TODO: Сохранение картинки по URL в папку TaskApp
+//+// 2. TODO: Сохранять title и desc в FromActivity (как WhatsApp) если юзер набрал текст но не нажал кнопку "Сохранить", то сохраняем в настройках
