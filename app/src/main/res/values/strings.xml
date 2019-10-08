@@ -20,4 +20,6 @@
     <string name="hi">Привет</string>
     <string name="start">Start</string>
     <string name="opening">opening</string>
+    <string name="droid">droid</string>
+
 </resources>

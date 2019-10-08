@@ -1,13 +1,19 @@
 package com.taskapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class FormActivity extends AppCompatActivity {
 
@@ -21,17 +27,25 @@ public class FormActivity extends AppCompatActivity {
         editTitle = findViewById(R.id.editTitle);
         editDesc = findViewById(R.id.editDesc);
 
-        SharedPreferences preferences2 = getSharedPreferences("saving", MODE_PRIVATE);
+        SharedPreferences preferences2 = getSharedPreferences("saving", MODE_PRIVATE);        //TODO: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         editTitle.setText(preferences2.getString("title", ""));
         editDesc.setText(preferences2.getString("desc", ""));
-        String title = preferences2.getString("title", "");
-        String desc = preferences2.getString("desc", "");
-        editTitle.setText(title);
-        editDesc.setText(desc);
+        //String title = preferences2.getString("title", "");
+        //String desc = preferences2.getString("desc", "");
+        //editTitle.setText(title);
+        //editDesc.setText(desc);
+
+        FloatingActionButton fab2 = findViewById(R.id.fab_two);
+        fab2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            }
+        });
     }
 
     @Override
-    public void onBackPressed() {
+    public void onBackPressed() {                                                                   //TODO: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         SharedPreferences preferences2 = getSharedPreferences("saving", MODE_PRIVATE);
         preferences2.edit().putString("title", editTitle.getText().toString()).apply();
         preferences2.edit().putString("desc", editDesc.getText().toString()).apply();
@@ -39,6 +53,19 @@ public class FormActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.form, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {                                  //TODO: для работы Меню
+        if (item.getItemId() == R.id.action_droid) {
+            Toast.makeText(this,"Я, андроид", Toast.LENGTH_SHORT).show();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     public void onClick(View view) {
         String title = editTitle.getText().toString();
