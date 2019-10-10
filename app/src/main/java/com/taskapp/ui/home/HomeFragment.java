@@ -14,10 +14,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.taskapp.App;
+import com.taskapp.FormActivity;
+import com.taskapp.MainActivity;
 import com.taskapp.R;
 import com.taskapp.Task;
 import com.taskapp.TaskAdapter;
 import com.taskapp.interfaces.OnItemClickListener;
+
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 import android.app.AlertDialog;
@@ -26,6 +30,8 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 
 public class HomeFragment extends Fragment {
+
+    static final int CODE = 10;
 
     AlertDialog.Builder alertD;
     Context context;
@@ -51,12 +57,16 @@ public class HomeFragment extends Fragment {
 
         adapter.setOnItemClickListener(new OnItemClickListener() { //вызываем метод у Adapter
             @Override
-            public void onItemClick(int position) {
+            public void onItemClick(int position) { //TODO: 2. При обычном нажатии на один из элементов открывается FormActivity для редактирования
+
+                startActivityForResult(new Intent(getContext(), FormActivity.class), CODE);
 
 
-                //Task task = list.get(position);
-                //Toast.makeText(getContext(),"pos = " + position, Toast.LENGTH_SHORT).show(); //показ позиции
-                //Toast.makeText(getContext(),"a) Title = " + task.getTitle() + "; b) Desc = " + task.getDesc(), Toast.LENGTH_SHORT).show(); //TODO: показ Title
+
+
+                //adapter.notifyDataSetChanged();
+                /*Task task = list.get(position);
+                Toast.makeText(getContext(),"a) Title = " + task.getTitle() + "; b) Desc = " + task.getDesc(), Toast.LENGTH_SHORT).show();*/
             }
 
             @Override                                                                               //TODO: 1. При долгом нажатии AlertDialog для удаления
@@ -74,8 +84,8 @@ public class HomeFragment extends Fragment {
                         App.getInstance().getDatabase().taskDao().delete(task); //удаляет из БД
                         list.remove(task);
                         adapter.notifyDataSetChanged();
-                        //Toast.makeText(getContext(),"pos = " + position, Toast.LENGTH_SHORT).show();
                         Toast.makeText(context, "Задача удалена", Toast.LENGTH_LONG).show();
+                        //Toast.makeText(getContext(),"pos = " + position, Toast.LENGTH_SHORT).show();
                     }
                 });
                 alertD.setNegativeButton(buttonNo, new OnClickListener() {
@@ -84,7 +94,7 @@ public class HomeFragment extends Fragment {
                     }
                 });
                 alertD.show();
-
+                adapter.notifyDataSetChanged();
 //                Task task = list.get(position);
 //                App.getInstance().getDatabase().taskDao().delete(task); //TODO: удаляет из БД
 //                list.remove(task);

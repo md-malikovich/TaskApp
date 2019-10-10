@@ -74,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-
         //initFile();
     }
 
@@ -134,6 +133,3 @@ public class MainActivity extends AppCompatActivity {
         navHostFragment.getChildFragmentManager().getFragments().get(0).onActivityResult(requestCode, resultCode, data);
     }
 }
-
-//-// 2. TODO: При обычном нажатии на один из элементов, открывается FormActivity для редактирования
-//-// 2. TODO: Сортировка по алфавиту (меню с иконкой)

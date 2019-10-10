@@ -47,7 +47,7 @@ public class FormActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {                                                                   //TODO: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    public void onBackPressed() {
         SharedPreferences preferences2 = getSharedPreferences("saving", MODE_PRIVATE);
         preferences2.edit().putString("title", editTitle.getText().toString()).apply();
         preferences2.edit().putString("desc", editDesc.getText().toString()).apply();
@@ -62,14 +62,14 @@ public class FormActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {                                  //TODO: для работы Меню
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {                                  //TODO: 3. Сортировка по алфавиту (меню с иконкой)
         if (item.getItemId() == R.id.action_droid) {
-            Toast.makeText(this,getString(R.string.android1) + getString(R.string.android2), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this,getString(R.string.android1) + getString(R.string.android2), Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);
     }
 
-    public void onClick(View view) {
+    public void onClick(View view) {                                                                //TODO: 2. Открывается FormActivity для редактирования
         String title = editTitle.getText().toString();
         String desc = editDesc.getText().toString();
         if (TextUtils.isEmpty(title)) {
