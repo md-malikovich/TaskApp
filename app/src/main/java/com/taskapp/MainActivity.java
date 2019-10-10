@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        initFile();
+        //initFile();
     }
 
     private void initFile() { // метод для работы с файлами
@@ -134,5 +134,6 @@ public class MainActivity extends AppCompatActivity {
         navHostFragment.getChildFragmentManager().getFragments().get(0).onActivityResult(requestCode, resultCode, data);
     }
 }
-//-// 1. TODO: Сохранение картинки по URL в папку TaskApp
-//+// 2. TODO: Сохранять title и desc в FromActivity (как WhatsApp) если юзер набрал текст но не нажал кнопку "Сохранить", то сохраняем в настройках
+
+//-// 2. TODO: При обычном нажатии на один из элементов, открывается FormActivity для редактирования
+//-// 2. TODO: Сортировка по алфавиту (меню с иконкой)

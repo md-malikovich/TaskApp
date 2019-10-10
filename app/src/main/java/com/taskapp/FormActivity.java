@@ -81,10 +81,12 @@ public class FormActivity extends AppCompatActivity {
             return;
         }
         Task task = new Task(title, desc);
+
+        App.getInstance().getDatabase().taskDao().insert(task); //TODO: записывает данные в таблицу Task
+
         Intent intent = new Intent();
         intent.putExtra("task", task);
         setResult(RESULT_OK, intent);
         finish();
-
     }
 }
