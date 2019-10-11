@@ -1,12 +1,15 @@
 package com.taskapp;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,8 +20,12 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class FormActivity extends AppCompatActivity {
 
+    static public final String NEW_KEY = "task";
+
     private EditText editTitle;
     private EditText editDesc;
+    Task task;
+    boolean isShowed=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,9 +34,17 @@ public class FormActivity extends AppCompatActivity {
         editTitle = findViewById(R.id.editTitle);
         editDesc = findViewById(R.id.editDesc);
 
-        SharedPreferences preferences2 = getSharedPreferences("saving", MODE_PRIVATE);        //TODO: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        editTitle.setText(preferences2.getString("title", ""));
-        editDesc.setText(preferences2.getString("desc", ""));
+        task = (Task) getIntent().getSerializableExtra(NEW_KEY);
+
+        if(task != null) {
+            editTitle.setText(task.getTitle());
+            editDesc.setText(task.getDesc());
+            isShowed = true;
+        }
+
+//        SharedPreferences preferences2 = getSharedPreferences("saving", MODE_PRIVATE);
+//        editTitle.setText(preferences2.getString("title", ""));
+//        editDesc.setText(preferences2.getString("desc", ""));
         //Вариант #2:
         //String title = preferences2.getString("title", "");
         //String desc = preferences2.getString("desc", "");
@@ -82,7 +97,10 @@ public class FormActivity extends AppCompatActivity {
         }
         Task task = new Task(title, desc);
 
-        App.getInstance().getDatabase().taskDao().insert(task); //TODO: записывает данные в таблицу Task
+
+        //App.getInstance().getDatabase().taskDao().insert(task); //TODO: записывает данные в таблицу Task
+        //App.getInstance().getDatabase().taskDao().update(task); //TODO: записывает данные в таблицу Task
+
 
         Intent intent = new Intent();
         intent.putExtra("task", task);
@@ -90,3 +108,14 @@ public class FormActivity extends AppCompatActivity {
         finish();
     }
 }
+
+/*
+                newTask = newTaskTitle.getText().toString();
+                newDescription = newTaskDescription.getText().toString();
+                Task task = new Task(newTask, newDescription, true);
+                Intent intent = new Intent();
+                intent.putExtra(NEW_KEY, task);
+                setResult(RESULT_OK, intent);
+                Log.d("ololo", "edit Task");
+                finish();
+ */

@@ -109,11 +109,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {                                  //TODO: для работы Меню
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.action_clear) {
             SharedPreferences preferences = getSharedPreferences("settings", MODE_PRIVATE);
             preferences.edit().clear().apply();
             finish();
+        }
+        if(item.getItemId() == R.id.action_abc) {                                                   //TODO: 3. Сортировка по алфавиту (меню с иконкой)
+            //
         }
         return super.onOptionsItemSelected(item);
     }
@@ -128,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.e("TAG", "onActivityResult activity");
+        //Log.e("TAG", "onActivityResult activity");
         Fragment navHostFragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navHostFragment.getChildFragmentManager().getFragments().get(0).onActivityResult(requestCode, resultCode, data);
     }

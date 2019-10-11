@@ -4,22 +4,35 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.taskapp.Task;
 
 import java.util.List;
 
-@Dao //TODO:
+@Dao
 public interface TaskDao {
+
 
     @Query("SELECT * FROM task") //TODO: выбрать ВСЕ из таблицы task
     List<Task> getAll();
+
+//    Task task = new Task();
+//    @Query("SELECT title, desc FROM task")
+//    List<Task> task.getTitle();
+//    List<Task> task.getDesc();
+
+    @Query("DELETE FROM task")
+    void deleteAll();
 
     @Insert
     void insert(Task task);
 
     @Delete
     void delete(Task task);
+
+    @Update
+    void update(Task task);
 }
 
 /*
@@ -28,13 +41,4 @@ public interface TaskDao {
 
    @Query("SELECT * FROM employee WHERE id = :id")
    Employee getById(long id);
-
-   @Insert
-   void insert(Employee employee);
-
-   @Update
-   void update(Employee employee);
-
-   @Delete
-   void delete(Employee employee);
  */

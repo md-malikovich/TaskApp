@@ -2,9 +2,12 @@ package com.taskapp.ui.home;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -29,9 +32,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 
-public class HomeFragment extends Fragment {
+import static android.app.Activity.RESULT_OK;
 
-    static final int CODE = 10;
+public class HomeFragment extends Fragment {
 
     AlertDialog.Builder alertD;
     Context context;
@@ -40,8 +43,7 @@ public class HomeFragment extends Fragment {
     private TaskAdapter adapter;
     private List<Task> list;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         recyclerView = root.findViewById(R.id.recyclerView);
         initList();
@@ -59,15 +61,25 @@ public class HomeFragment extends Fragment {
             @Override
             public void onItemClick(int position) { //TODO: 2. При обычном нажатии на один из элементов открывается FormActivity для редактирования
 
-                startActivityForResult(new Intent(getContext(), FormActivity.class), CODE);
+                Intent intent = new Intent(getContext(), FormActivity.class);
+                intent.putExtra("task", list.get(position));
+                startActivityForResult(intent, 100);
 
-
-
-
+                //Task task = new Task();
+                //intent.putExtra(NEW_KEY, task);
+                //getActivity().setResult(RESULT_OK, intent);
+                //Task task = new Task();
+                //getTask(task);
+//                Intent intent1 = new Intent(getContext(), FormActivity.class);
+//                intent1.putExtra(NEW_KEY, task);
+//                intent1.putExtra("task", list.get(position));
+//                startActivity(intent);
+                //startActivityForResult(intent, CODE);
                 //adapter.notifyDataSetChanged();
                 /*Task task = list.get(position);
                 Toast.makeText(getContext(),"a) Title = " + task.getTitle() + "; b) Desc = " + task.getDesc(), Toast.LENGTH_SHORT).show();*/
             }
+
 
             @Override                                                                               //TODO: 1. При долгом нажатии AlertDialog для удаления
             public void onItemLongClick(final int position) { //показ позиции при ДОЛГОМ нажатии
@@ -102,14 +114,13 @@ public class HomeFragment extends Fragment {
 //                Toast.makeText(getContext(),"pos = " + position, Toast.LENGTH_SHORT).show(); //TODO: показ позиции при ДОЛГОМ нажатии
             }
         });
-
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.e("TAG", "onActivityResult fragment");
-        if (resultCode == Activity.RESULT_OK && requestCode == 100) {
+        Log.e("ololo", "onActivityResult fragment");
+        if (resultCode == RESULT_OK && requestCode == 100) {
             Task task = (Task) data.getSerializableExtra("task");
             list.add(task);
             adapter.notifyDataSetChanged();
