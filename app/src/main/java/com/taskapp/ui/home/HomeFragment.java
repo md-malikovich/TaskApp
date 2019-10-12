@@ -60,28 +60,13 @@ public class HomeFragment extends Fragment {
         adapter.setOnItemClickListener(new OnItemClickListener() { //вызываем метод у Adapter
             @Override
             public void onItemClick(int position) { //TODO: 2. При обычном нажатии на один из элементов открывается FormActivity для редактирования
-
                 Intent intent = new Intent(getContext(), FormActivity.class);
                 intent.putExtra("task", list.get(position));
                 startActivityForResult(intent, 100);
-
-                //Task task = new Task();
-                //intent.putExtra(NEW_KEY, task);
-                //getActivity().setResult(RESULT_OK, intent);
-                //Task task = new Task();
-                //getTask(task);
-//                Intent intent1 = new Intent(getContext(), FormActivity.class);
-//                intent1.putExtra(NEW_KEY, task);
-//                intent1.putExtra("task", list.get(position));
-//                startActivity(intent);
-                //startActivityForResult(intent, CODE);
-                //adapter.notifyDataSetChanged();
-                /*Task task = list.get(position);
-                Toast.makeText(getContext(),"a) Title = " + task.getTitle() + "; b) Desc = " + task.getDesc(), Toast.LENGTH_SHORT).show();*/
+                //Toast.makeText(getContext(),"a) Title = " + task.getTitle() + "; b) Desc = " + task.getDesc(), Toast.LENGTH_SHORT).show();
             }
 
-
-            @Override                                                                               //TODO: 1. При долгом нажатии AlertDialog для удаления
+            @Override                                                                               //TODO: 1. При долгом нажатии AlertDialog для удаления+
             public void onItemLongClick(final int position) { //показ позиции при ДОЛГОМ нажатии
                 context = getActivity();
                 String message = "Вы действительно хотите удалить данную задачу?";
@@ -122,7 +107,10 @@ public class HomeFragment extends Fragment {
         Log.e("ololo", "onActivityResult fragment");
         if (resultCode == RESULT_OK && requestCode == 100) {
             Task task = (Task) data.getSerializableExtra("task");
+
             list.add(task);
+            //list.set(0, task);
+            //list.remove(task);
             adapter.notifyDataSetChanged();
         }
     }

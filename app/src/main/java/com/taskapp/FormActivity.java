@@ -25,7 +25,7 @@ public class FormActivity extends AppCompatActivity {
     private EditText editTitle;
     private EditText editDesc;
     Task task;
-    boolean isShowed=false;
+    //boolean isShowed=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +35,10 @@ public class FormActivity extends AppCompatActivity {
         editDesc = findViewById(R.id.editDesc);
 
         task = (Task) getIntent().getSerializableExtra(NEW_KEY);
-
-        if(task != null) {
+        if (task != null) {
             editTitle.setText(task.getTitle());
             editDesc.setText(task.getDesc());
-            isShowed = true;
+            //isShowed = true;
         }
 
 //        SharedPreferences preferences2 = getSharedPreferences("saving", MODE_PRIVATE);
@@ -77,14 +76,14 @@ public class FormActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {                                  //TODO: 3. Сортировка по алфавиту (меню с иконкой)
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.action_droid) {
-            //Toast.makeText(this,getString(R.string.android1) + getString(R.string.android2), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.android1) + getString(R.string.android2), Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);
     }
 
-    public void onClick(View view) {                                                                //TODO: 2. Открывается FormActivity для редактирования
+    public void onClick(View view) {
         String title = editTitle.getText().toString();
         String desc = editDesc.getText().toString();
         if (TextUtils.isEmpty(title)) {
@@ -96,26 +95,13 @@ public class FormActivity extends AppCompatActivity {
             return;
         }
         Task task = new Task(title, desc);
+        App.getInstance().getDatabase().taskDao().update(task);
 
-
-        //App.getInstance().getDatabase().taskDao().insert(task); //TODO: записывает данные в таблицу Task
-        //App.getInstance().getDatabase().taskDao().update(task); //TODO: записывает данные в таблицу Task
-
+        //App.getInstance().getDatabase().taskDao().insert(task);
 
         Intent intent = new Intent();
-        intent.putExtra("task", task);
+        intent.putExtra(NEW_KEY, task);
         setResult(RESULT_OK, intent);
         finish();
     }
 }
-
-/*
-                newTask = newTaskTitle.getText().toString();
-                newDescription = newTaskDescription.getText().toString();
-                Task task = new Task(newTask, newDescription, true);
-                Intent intent = new Intent();
-                intent.putExtra(NEW_KEY, task);
-                setResult(RESULT_OK, intent);
-                Log.d("ololo", "edit Task");
-                finish();
- */
