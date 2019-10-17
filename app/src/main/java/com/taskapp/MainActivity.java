@@ -21,6 +21,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
 import com.taskapp.onboard.OnBoardActivity;
+import com.taskapp.ui.home.HomeFragment;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("settings", MODE_PRIVATE); // создается файл settings
         boolean isShown = preferences.getBoolean("isShown", false);
 
-        if(!isShown) {
+        if (!isShown) {
             startActivity(new Intent(this, OnBoardActivity.class)); //TODO: будет выходть постоянно
             finish(); //TODO: для закрытия startActivity
             return; //TODO: необходимо для завершения метода onCreate
@@ -114,15 +115,27 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    public boolean sortList;
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.action_clear) {
-            SharedPreferences preferences = getSharedPreferences("settings", MODE_PRIVATE);
-            preferences.edit().clear().apply();
-            finish();
-        }
-        if(item.getItemId() == R.id.action_abc) {                                                   //TODO: 3. Сортировка по алфавиту (меню с иконкой)
-            //
+        switch (item.getItemId()) {
+            case R.id.action_clear:
+                SharedPreferences preferences = getSharedPreferences("settings", MODE_PRIVATE);
+                preferences.edit().clear().apply();
+                finish();
+                break;
+            case R.id.action_abc:
+
+                if(sortList) {
+                    Fragment navHostFragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+                    ((HomeFragment) navHostFragment.getChildFragmentManager().getFragments().get(0)).sortList(); //TODO: вызывает из Фраг метод - sortList();
+                    sortList = false;
+                    break;
+                } else {
+                    Fragment navHostFragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+                    ((HomeFragment) navHostFragment.getChildFragmentManager().getFragments().get(0)).initList();
+                    sortList = true;
+                }
         }
         return super.onOptionsItemSelected(item);
     }
@@ -142,3 +155,7 @@ public class MainActivity extends AppCompatActivity {
         navHostFragment.getChildFragmentManager().getFragments().get(0).onActivityResult(requestCode, resultCode, data);
     }
 }
+
+// TODO: 1. Lottie (Lottie Activity через шторку)
+// TODO: 2. Room (при нажатии на SORT, обратно переключить список на "по порядку добавления")
+// TODO: 3. Добавляем поле checked (boolean) в Task (в списке тасков будет CheckBox, при нажтии сохраняется в бд)

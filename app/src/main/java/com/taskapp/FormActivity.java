@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -25,7 +26,7 @@ public class FormActivity extends AppCompatActivity {
     private EditText editTitle;
     private EditText editDesc;
     Task task;
-    //boolean isShowed=false;
+    //CheckBox isDone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +34,14 @@ public class FormActivity extends AppCompatActivity {
         setContentView(R.layout.activity_form);
         editTitle = findViewById(R.id.editTitle);
         editDesc = findViewById(R.id.editDesc);
+        //isDone = findViewById(R.id.isDone);
 
         task = (Task) getIntent().getSerializableExtra(NEW_KEY);
         if (task != null) {
             editTitle.setText(task.getTitle());
             editDesc.setText(task.getDesc());
-            //isShowed = true;
+            //isDone.setChecked(false);
+            //isDone.setChecked(task.isDone());
         }
 
 //        SharedPreferences preferences2 = getSharedPreferences("saving", MODE_PRIVATE);
@@ -50,12 +53,13 @@ public class FormActivity extends AppCompatActivity {
         //editTitle.setText(title);
         //editDesc.setText(desc);
 
-        FloatingActionButton fab2 = findViewById(R.id.fab_two);
+        FloatingActionButton fab2 = findViewById(R.id.fab_clear);
         fab2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 editTitle.setText("");
                 editDesc.setText("");
+
             }
         });
     }
@@ -84,8 +88,10 @@ public class FormActivity extends AppCompatActivity {
     }
 
     public void onClick(View view) {
-        String title = editTitle.getText().toString();
-        String desc = editDesc.getText().toString();
+        String title = editTitle.getText().toString().trim();
+        String desc = editDesc.getText().toString().trim();
+
+
         if (TextUtils.isEmpty(title)) {
             editTitle.setError("Заполните это поле");
             return;
@@ -94,10 +100,15 @@ public class FormActivity extends AppCompatActivity {
             editDesc.setError("Заполните это поле");
             return;
         }
-        Task task = new Task(title, desc);
-        App.getInstance().getDatabase().taskDao().update(task);
+        if(task != null) {
+            task.setTitle(title);
+            task.setDesc(desc);
 
-        //App.getInstance().getDatabase().taskDao().insert(task);
+            App.getInstance().getDatabase().taskDao().update(task);
+        } else {
+            task = new Task(title, desc);
+            App.getInstance().getDatabase().taskDao().insert(task);
+        }
 
         Intent intent = new Intent();
         intent.putExtra(NEW_KEY, task);

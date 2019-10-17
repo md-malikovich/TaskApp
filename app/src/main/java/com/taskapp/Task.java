@@ -1,5 +1,7 @@
 package com.taskapp;
 
+import android.widget.CheckBox;
+
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -12,36 +14,47 @@ public class Task implements Serializable {
     private long id; //TODO: добавили id
     private String title;
     private String desc;
+    //public boolean isDone;
+    //CheckBox isDone;
 
     public Task() { //TODO:
     }
 
-    public Task(String title, String desc) {
+    public Task(String title, String desc) { //, boolean isDone
         this.title = title;
         this.desc = desc;
+        //this.isDone = isDone;
     }
 
     public long getId() {
         return id;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
     public String getTitle() {
         return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getDesc() {
         return desc;
     }
 
+//    public boolean isDone() {
+//        return isDone;
+//    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public void setDesc(String desc) {
         this.desc = desc;
     }
+
+//    public void setDone(boolean done) {
+//        isDone = done;
+//    }
 }

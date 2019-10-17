@@ -18,6 +18,9 @@ public interface TaskDao {
     @Query("SELECT * FROM task") //TODO: выбрать ВСЕ из таблицы task
     List<Task> getAll();
 
+    @Query("SELECT * FROM task ORDER BY title ASC") //TODO: DESC в обратном порядке
+    List<Task> getAllSorted();
+
 //    Task task = new Task();
 //    @Query("SELECT title, desc FROM task")
 //    List<Task> task.getTitle();
@@ -34,7 +37,6 @@ public interface TaskDao {
 
     @Update
     void update(Task task);
-
 }
 
 /*

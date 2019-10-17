@@ -13,23 +13,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="italic"
+        style="@style/EditTextStyle"
         android:hint="Title" />
 
     <EditText
         android:id="@+id/editDesc"
+        style="@style/EditTextStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="italic"
         android:hint="Desc" />
 
+    <CheckBox
+        android:id="@+id/isDone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="false"/>
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="onClick"
+        android:background="@drawable/button_stroke"
+        android:textColor="@color/colorPrimary"
         android:text="save" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_two"
+        android:id="@+id/fab_clear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"

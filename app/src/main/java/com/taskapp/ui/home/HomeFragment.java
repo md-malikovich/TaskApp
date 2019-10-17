@@ -42,6 +42,7 @@ public class HomeFragment extends Fragment {
     private RecyclerView recyclerView;
     private TaskAdapter adapter;
     private List<Task> list;
+    private int pos;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
@@ -50,7 +51,7 @@ public class HomeFragment extends Fragment {
         return root;
     }
 
-    private void initList() {
+    public void initList() {
         list = new ArrayList<>();
         list = App.getInstance().getDatabase().taskDao().getAll(); //TODO: получаем данные из таблицы
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -60,9 +61,11 @@ public class HomeFragment extends Fragment {
         adapter.setOnItemClickListener(new OnItemClickListener() { //вызываем метод у Adapter
             @Override
             public void onItemClick(int position) { //TODO: 2. При обычном нажатии на один из элементов открывается FormActivity для редактирования
+                pos = position;
+                Task task = list.get(position);
                 Intent intent = new Intent(getContext(), FormActivity.class);
-                intent.putExtra("task", list.get(position));
-                startActivityForResult(intent, 100);
+                intent.putExtra("task", task); //list.get(position)
+                startActivityForResult(intent, 101);
                 //Toast.makeText(getContext(),"a) Title = " + task.getTitle() + "; b) Desc = " + task.getDesc(), Toast.LENGTH_SHORT).show();
             }
 
@@ -101,16 +104,23 @@ public class HomeFragment extends Fragment {
         });
     }
 
+    public void sortList(){
+        list.clear();
+        list.addAll(App.getInstance().getDatabase().taskDao().getAllSorted());
+        adapter.notifyDataSetChanged();
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Log.e("ololo", "onActivityResult fragment");
-        if (resultCode == RESULT_OK && requestCode == 100) {
+        if (resultCode == Activity.RESULT_OK) {
             Task task = (Task) data.getSerializableExtra("task");
-
-            list.add(task);
-            //list.set(0, task);
-            //list.remove(task);
+            if (requestCode == 100) {
+                list.add(task);
+            } else if (requestCode == 101) {
+                list.set(pos, task);
+            }
             adapter.notifyDataSetChanged();
         }
     }

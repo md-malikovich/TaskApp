@@ -3,6 +3,7 @@ package com.taskapp;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -46,11 +47,14 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
 
         private TextView textTitle;
         private TextView textDesc;
+        private CheckBox chIsDone;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             textTitle = itemView.findViewById(R.id.textTitle);
             textDesc = itemView.findViewById(R.id.textDesc);
+            chIsDone = itemView.findViewById(R.id.frag_isDone);
+
 
             itemView.setOnClickListener(new View.OnClickListener() { //TODO: добавляем слушателя на элемент VH
                 @Override
@@ -72,7 +76,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         public void bind(Task task) {
             textTitle.setText(task.getTitle());
             textDesc.setText(task.getDesc());
-
+            //chIsDone.setChecked(task.isDone());
         }
     }
 }
